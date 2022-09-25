@@ -20,6 +20,20 @@ const main = async () => {
   config.addJob(buildJob)
   workflow.addJob(buildJob)
 
+  const testJob = new CircleCI.Job('test', nodeExecutor, [
+    new CircleCI.commands.Checkout(),
+    new CircleCI.commands.Run({
+      name: 'install',
+      command: 'npm ci',
+    }),
+    new CircleCI.commands.Run({
+      name: 'test',
+      command: 'npm run test',
+    })
+  ])
+  config.addJob(testJob)
+  workflow.addJob(testJob)
+
   console.log(config.stringify())
   console.warn(config.stringify())
 }
