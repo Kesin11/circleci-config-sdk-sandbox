@@ -1,0 +1,25 @@
+{
+  "name": "circleci-config-sdk-sandbox",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Sandbox of circleci-config-sdk",
+  "main": "index.js",
+  "scripts": {
+    "basic": "node basic.js | circleci config validate -",
+    "reusable": "node reusable.js | circleci config validate -"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kesin11/circleci-config-sdk-sandbox.git"
+  },
+  "keywords": [],
+  "author": "kesin1202000@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kesin11/circleci-config-sdk-sandbox/issues"
+  },
+  "homepage": "https://github.com/Kesin11/circleci-config-sdk-sandbox#readme",
+  "dependencies": {
+    "@circleci/circleci-config-sdk": "^0.10.1"
+  }
+}
