@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "basic": "node basic.js | circleci config validate -",
-    "reusable": "node reusable.js | circleci config validate -"
+    "reusable": "node reusable.js | circleci config validate -",
+    "parameter": "node parameter.js | circleci config validate -"
   },
   "repository": {
     "type": "git",
