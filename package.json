@@ -9,7 +9,8 @@
     "reusable": "node reusable.js | circleci config validate -",
     "parameter": "node parameter.js | circleci config validate -",
     "orbs": "node orbs.js | circleci config validate -",
-    "docker": "node docker.js | circleci config validate -"
+    "docker": "node docker.js | circleci config validate -",
+    "manual": "node manual.js | circleci config validate -"
   },
   "repository": {
     "type": "git",
