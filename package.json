@@ -10,7 +10,10 @@
     "parameter": "node parameter.js | circleci config validate -",
     "orbs": "node orbs.js | circleci config validate -",
     "docker": "node docker.js | circleci config validate -",
-    "manual": "node manual.js | circleci config validate -"
+    "manual": "node manual.js | circleci config validate -",
+    "build": "echo 'build'",
+    "test": "echo 'test'",
+    "deploy": "echo 'deploy'"
   },
   "repository": {
     "type": "git",
