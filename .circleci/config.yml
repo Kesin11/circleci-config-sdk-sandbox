@@ -4,29 +4,32 @@
 
 version: 2.1
 setup: false
-jobs:
-  build:
-    docker:
-      - &a1
-        image: cimg/node:lts
-    resource_class: small
+commands:
+  install:
     steps:
       - checkout
       - run:
-          name: install
+          name: Install
           command: npm ci
+executors:
+  node:
+    docker:
+      - image: cimg/node:lts
+    resource_class: small
+jobs:
+  build:
+    executor:
+      name: node
+    steps:
+      - install
       - run:
           name: build
           command: npm run build
   test:
-    docker:
-      - *a1
-    resource_class: small
+    executor:
+      name: node
     steps:
-      - checkout
-      - run:
-          name: install
-          command: npm ci
+      - install
       - run:
           name: test
           command: npm run test
