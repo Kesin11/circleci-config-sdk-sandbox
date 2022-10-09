@@ -11,31 +11,52 @@ commands:
       - run:
           name: Install
           command: npm ci
+  npm_run:
+    parameters:
+      task:
+        type: enum
+        enum:
+          - build
+          - test
+    steps:
+      - run:
+          name: npm << parameters.task >>
+          command: npm run <<parameters.task >>
 executors:
   node:
     docker:
-      - image: cimg/node:lts
+      - image: cimg/node:<< parameters.tag >>
     resource_class: small
+    parameters:
+      tag:
+        type: string
+        default: lts
 jobs:
   build:
+    parameters:
+      tag:
+        type: string
     executor:
       name: node
     steps:
       - install
-      - run:
-          name: build
-          command: npm run build
+      - npm_run:
+          task: build
   test:
+    parameters:
+      tag:
+        type: string
     executor:
       name: node
     steps:
       - install
-      - run:
-          name: test
-          command: npm run test
+      - npm_run:
+          task: test
 workflows:
   build:
     jobs:
-      - build
-      - test
+      - build:
+          tag: lts
+      - test:
+          tag: "16"
 
