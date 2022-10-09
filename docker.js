@@ -29,7 +29,7 @@ const main = async () => {
     new CircleCI.commands.Run({
       name: "Setup docker buildx",
       command: [
-        "docker context circleci",
+        "docker context create circleci",
         "docker buildx create --use circleci",
         "docker buildx ls",
         "docker context inspect circleci",
