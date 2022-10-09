@@ -4,59 +4,26 @@
 
 version: 2.1
 setup: false
-commands:
-  install:
-    steps:
-      - checkout
-      - run:
-          name: Install
-          command: npm ci
-  npm_run:
-    parameters:
-      task:
-        type: enum
-        enum:
-          - build
-          - test
-    steps:
-      - run:
-          name: npm << parameters.task >>
-          command: npm run <<parameters.task >>
-executors:
-  node:
-    docker:
-      - image: cimg/node:<< parameters.tag >>
-    resource_class: small
-    parameters:
-      tag:
-        type: string
-        default: lts
 jobs:
   build:
-    parameters:
-      tag:
-        type: string
     executor:
-      name: node
+      name: node/default
+      tag: lts
     steps:
-      - install
-      - npm_run:
-          task: build
-  test:
-    parameters:
-      tag:
-        type: string
-    executor:
-      name: node
-    steps:
-      - install
-      - npm_run:
-          task: test
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+          cache-version: v2
+      - run:
+          name: build
+          command: npm run build
 workflows:
   build:
     jobs:
-      - build:
-          tag: lts
-      - test:
-          tag: "16"
+      - build
+      - node/test:
+          run-command: test:ci
+          version: lts
+orbs:
+  node: circleci/node@5.0.3
 
