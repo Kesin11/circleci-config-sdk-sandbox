@@ -13,6 +13,7 @@
     "manual": "node manual.js | circleci config validate -",
     "build": "echo 'build'",
     "test": "echo 'test'",
+    "test:ci": "echo 'test:ci'",
     "deploy": "echo 'deploy'"
   },
   "repository": {
